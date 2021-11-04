@@ -90,9 +90,6 @@ public class TodoListControllerTest {
         ResultActions resultActions = mockMvc.perform(delete("/todos/" + id));
 
         //then
-        resultActions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.text").value(todoItem1.getText()))
-                .andExpect(jsonPath("$.finished").value(todoItem1.isFinished()));
+        resultActions.andExpect(status().isOk());
     }
 }

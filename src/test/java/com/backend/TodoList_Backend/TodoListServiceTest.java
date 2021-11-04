@@ -60,17 +60,12 @@ public class TodoListServiceTest {
     @Test
     void should_return_todo_item_when_delete_item_given_a_id (){
         //given
-        TodoItem expected = new TodoItem("test", false);
-        expected.setId(1);
-        
-        when(todoListRepository.findById(any())).thenReturn(Optional.of(expected));
-        doNothing().when(todoListRepository).deleteById(expected.getId());
+        doNothing().when(todoListRepository).deleteById(1);
 
         //when
-        TodoItem actual = todoListService.deleteById(expected.getId());
+        todoListService.deleteById(1);
 
         //then
-        verify(todoListRepository, times(1)).deleteById(expected.getId());
-        assertEquals(expected.getId(), actual.getId());
+        verify(todoListRepository, times(1)).deleteById(1);
     }
 }

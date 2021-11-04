@@ -23,9 +23,7 @@ public class TodoListService {
         return todoListRepository.save(todoItem);
     }
 
-    public TodoItem deleteById(int id) {
-        TodoItem todoItem = todoListRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
+    public void deleteById(int id) {
         todoListRepository.deleteById(id);
-        return todoItem;
     }
 }

@@ -39,4 +39,9 @@ public class TodoListController {
         TodoItem todoItem = todoListService.addTodoItem(todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todoItem);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Integer id) {
+        todoListService.deleteById(id);
+    }
 }
