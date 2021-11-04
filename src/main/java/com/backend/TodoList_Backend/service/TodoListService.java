@@ -22,4 +22,10 @@ public class TodoListService {
     public TodoItem addTodoItem(TodoItem todoItem) {
         return todoListRepository.save(todoItem);
     }
+
+    public TodoItem deleteById(int id) {
+        TodoItem todoItem = todoListRepository.getById(id);
+        todoListRepository.deleteById(id);
+        return todoItem;
+    }
 }
