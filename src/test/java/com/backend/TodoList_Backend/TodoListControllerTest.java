@@ -13,8 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,7 +36,7 @@ public class TodoListControllerTest {
     }
 
     @Test
-    void should_return_todo_item_list_when_get_todo_list_given_a_todo_repository () throws Exception{
+    void should_return_todo_item_list_when_get_todo_list_given_a_todo_repository() throws Exception {
         //given
         TodoItem todoItem1 = new TodoItem("Hi", false);
         TodoItem todoItem2 = new TodoItem("Hi2", true);
@@ -59,7 +58,7 @@ public class TodoListControllerTest {
     }
 
     @Test
-    void should_return_todo_item_when_add_todo_item_given_a_todo_item () throws Exception{
+    void should_return_todo_item_when_add_todo_item_given_a_todo_item() throws Exception {
         //given
         String item = "{\n" +
                 "   \"text\": \"Thoughtworks\",\n" +
@@ -74,5 +73,26 @@ public class TodoListControllerTest {
         resultActions.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.text").value("Thoughtworks"))
                 .andExpect(jsonPath("$.finished").value(true));
+    }
+
+    @Test
+    void should_return_deleted_todo_item_when_delete_todo_item_given_id() throws Exception{
+        //given
+        TodoItem todoItem1 = new TodoItem("Hi", false);
+        TodoItem todoItem2 = new TodoItem("Hi2", true);
+
+        todoRepository.save(todoItem1);
+        todoRepository.save(todoItem2);
+
+        Integer id = todoItem1.getId();
+
+        //when
+        ResultActions resultActions = mockMvc.perform(delete("/todos/" + id));
+
+        //then
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value(todoItem1.getText()))
+                .andExpect(jsonPath("$.finished").value(todoItem1.isFinished()));
     }
 }
