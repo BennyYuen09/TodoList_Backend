@@ -77,6 +77,7 @@ public class TodoListServiceTest {
 
         TodoItem update = new TodoItem("Thoughtwork", false);
         TodoItem updated = new TodoItem("Thoughtwork", true);
+        updated.setId(1);
         when(todoListRepository.save(any(TodoItem.class))).thenReturn(updated);
 
         //when

@@ -28,6 +28,6 @@ public class TodoListService {
     }
 
     public TodoItem updateTodoItem(TodoItem update) {
-        return null;
+        return todoListRepository.save(update);
     }
 }
