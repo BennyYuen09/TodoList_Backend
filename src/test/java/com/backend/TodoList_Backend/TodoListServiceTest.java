@@ -62,6 +62,7 @@ public class TodoListServiceTest {
         //given
         TodoItem expected = new TodoItem("test", false);
         expected.setId(1);
+        
         when(todoListRepository.findById(any())).thenReturn(Optional.of(expected));
         doNothing().when(todoListRepository).deleteById(expected.getId());
 

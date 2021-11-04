@@ -1,7 +1,7 @@
 package com.backend.TodoList_Backend.service;
 
-import com.backend.TodoList_Backend.dto.TodoResponse;
 import com.backend.TodoList_Backend.entity.TodoItem;
+import com.backend.TodoList_Backend.exception.TodoItemNotFoundException;
 import com.backend.TodoList_Backend.repository.TodoListRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class TodoListService {
     }
 
     public TodoItem deleteById(int id) {
-        TodoItem todoItem = todoListRepository.getById(id);
+        TodoItem todoItem = todoListRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
         todoListRepository.deleteById(id);
         return todoItem;
     }
