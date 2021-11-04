@@ -61,14 +61,14 @@ public class TodoListControllerTest {
     @Test
     void should_return_todo_item_when_add_todo_item_given_a_todo_item () throws Exception{
         //given
-        String companyInfo = "{\n" +
+        String item = "{\n" +
                 "   \"text\": \"Thoughtworks\",\n" +
                 "   \"finished\": true\n" +
                 "}\n";
 
         //when
         ResultActions resultActions = mockMvc.perform(post("/todos")
-                .contentType(MediaType.APPLICATION_JSON).content(companyInfo));
+                .contentType(MediaType.APPLICATION_JSON).content(item));
 
         //then
         resultActions.andExpect(status().isCreated())
