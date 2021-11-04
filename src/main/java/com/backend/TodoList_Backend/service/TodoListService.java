@@ -35,6 +35,6 @@ public class TodoListService {
         if (update.getFinished() != null){
             todoItem.setFinished(update.getFinished());
         }
-        return todoListRepository.save(update);
+        return todoListRepository.save(todoItem);
     }
 }

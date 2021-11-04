@@ -24,7 +24,7 @@ public class TodoResponse {
         this.text = text;
     }
 
-    public boolean isFinished() {
+    public Boolean getFinished() {
         return finished;
     }
 
