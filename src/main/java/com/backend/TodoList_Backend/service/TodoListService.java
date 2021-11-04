@@ -26,4 +26,8 @@ public class TodoListService {
     public void deleteById(int id) {
         todoListRepository.deleteById(id);
     }
+
+    public TodoItem updateTodoItem(TodoItem update) {
+        return null;
+    }
 }

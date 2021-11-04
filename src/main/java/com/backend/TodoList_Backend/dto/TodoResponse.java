@@ -3,7 +3,7 @@ package com.backend.TodoList_Backend.dto;
 public class TodoResponse {
     private Integer id;
     private String text;
-    private boolean finished;
+    private Boolean finished;
 
     public TodoResponse() {
     }

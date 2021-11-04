@@ -2,7 +2,7 @@ package com.backend.TodoList_Backend.dto;
 
 public class TodoRequest {
     private String text;
-    private boolean finished;
+    private Boolean finished;
 
     public TodoRequest() {
     }

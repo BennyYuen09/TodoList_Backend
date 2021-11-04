@@ -76,7 +76,7 @@ public class TodoListControllerTest {
     }
 
     @Test
-    void should_return_deleted_todo_item_when_delete_todo_item_given_id() throws Exception{
+    void should_return_deleted_todo_item_when_delete_todo_item_given_id() throws Exception {
         //given
         TodoItem todoItem1 = new TodoItem("Hi", false);
         TodoItem todoItem2 = new TodoItem("Hi2", true);
@@ -91,5 +91,30 @@ public class TodoListControllerTest {
 
         //then
         resultActions.andExpect(status().isOk());
+    }
+
+    @Test
+    void should_return_updated_todo_item_when_update_todo_item_given_update_info() throws Exception {
+        //given
+        TodoItem todoItem1 = new TodoItem("Hi", false);
+        TodoItem todoItem2 = new TodoItem("Hi2", true);
+
+        todoRepository.save(todoItem1);
+        todoRepository.save(todoItem2);
+
+        String updateInfo = "{\n" +
+                "   \"text\": \"Thoughtworks\",\n" +
+                "   \"finished\": true\n" +
+                "}\n";
+
+        //when
+        ResultActions resultActions = mockMvc.perform(put("/todos/" + todoItem1.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(updateInfo));
+
+        //then
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(todoItem1.getId()))
+                .andExpect(jsonPath("$.text").value(todoItem1.getText()))
+                .andExpect(jsonPath("$.finished").value(todoItem1.isFinished()));
     }
 }

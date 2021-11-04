@@ -68,4 +68,21 @@ public class TodoListServiceTest {
         //then
         verify(todoListRepository, times(1)).deleteById(1);
     }
+
+    @Test
+    void should_return_update_todo_item_when_update_todo_item_given_update_info (){
+        //given
+        TodoItem todoItem = new TodoItem("Test", true);
+        when(todoListRepository.findById(any())).thenReturn(Optional.of(todoItem));
+
+        TodoItem update = new TodoItem("Thoughtwork", false);
+        TodoItem updated = new TodoItem("Thoughtwork", true);
+        when(todoListRepository.save(any(TodoItem.class))).thenReturn(updated);
+
+        //when
+        TodoItem actual = todoListService.updateTodoItem(update);
+
+        //then
+        assertEquals(updated, actual);
+    }
 }
