@@ -23,7 +23,7 @@ public class TodoListController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     public List<TodoResponse> getTodoList() {
         return todoListService.getTodoList()
                 .stream()
@@ -34,7 +34,7 @@ public class TodoListController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     public TodoResponse addTodoItem(@RequestBody TodoRequest todoRequest) {
         TodoItem todoItem = todoListService.addTodoItem(todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todoItem);
