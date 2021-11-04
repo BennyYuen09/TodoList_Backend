@@ -30,6 +30,7 @@ public class TodoListControllerTest {
     @Autowired
     private TodoMapper todoMapper;
 
+    @Sql(statements = "alter table todo_item alter column id restart with 1")
     @BeforeEach
     void Setup() {
         todoRepository.deleteAll();
@@ -99,7 +100,7 @@ public class TodoListControllerTest {
         TodoItem todoItem1 = new TodoItem("Hi", false);
         TodoItem todoItem2 = new TodoItem("Hi2", true);
 
-        todoRepository.save(todoItem1);
+        todoItem1 = todoRepository.save(todoItem1);
         todoRepository.save(todoItem2);
 
         String updateInfo = "{\n" +
@@ -113,8 +114,7 @@ public class TodoListControllerTest {
 
         //then
         resultActions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(todoItem1.getId()))
-                .andExpect(jsonPath("$.text").value(todoItem1.getText()))
-                .andExpect(jsonPath("$.finished").value(todoItem1.isFinished()));
+                .andExpect(jsonPath("$.text").value("Thoughtworks"))
+                .andExpect(jsonPath("$.finished").value(true));
     }
 }
