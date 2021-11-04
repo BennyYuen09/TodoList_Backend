@@ -81,7 +81,7 @@ public class TodoListServiceTest {
         when(todoListRepository.save(any(TodoItem.class))).thenReturn(updated);
 
         //when
-        TodoItem actual = todoListService.updateTodoItem(update);
+        TodoItem actual = todoListService.updateTodoItem(1, update);
 
         //then
         assertEquals(updated, actual);

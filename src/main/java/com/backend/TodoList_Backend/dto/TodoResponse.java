@@ -28,7 +28,7 @@ public class TodoResponse {
         return finished;
     }
 
-    public void setFinished(boolean finished) {
+    public void setFinished(Boolean finished) {
         this.finished = finished;
     }
 }

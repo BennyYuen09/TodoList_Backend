@@ -37,11 +37,11 @@ public class TodoItem {
         this.text = text;
     }
 
-    public boolean isFinished() {
+    public Boolean getFinished() {
         return finished;
     }
 
-    public void setFinished(boolean finished) {
+    public void setFinished(Boolean finished) {
         this.finished = finished;
     }
 }

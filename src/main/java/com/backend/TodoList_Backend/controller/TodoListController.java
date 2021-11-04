@@ -47,7 +47,7 @@ public class TodoListController {
 
     @PutMapping("/{id}")
     public TodoResponse updateTodoItem(@PathVariable("id") Integer id, @RequestBody TodoRequest todoRequest) {
-        TodoItem todoItem = todoListService.updateTodoItem(todoMapper.toEntity(todoRequest));
+        TodoItem todoItem = todoListService.updateTodoItem(id, todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todoItem);
     }
 }

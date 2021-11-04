@@ -50,10 +50,10 @@ public class TodoListControllerTest {
 
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].text").value(todoItem1.getText()))
-                .andExpect(jsonPath("$[0].finished").value(todoItem1.isFinished()))
+                .andExpect(jsonPath("$[0].finished").value(todoItem1.getFinished()))
 
                 .andExpect(jsonPath("$[1].text").value(todoItem2.getText()))
-                .andExpect(jsonPath("$[1].finished").value(todoItem2.isFinished()))
+                .andExpect(jsonPath("$[1].finished").value(todoItem2.getFinished()))
 
                 .andExpect(jsonPath("$[2]").doesNotExist());
     }

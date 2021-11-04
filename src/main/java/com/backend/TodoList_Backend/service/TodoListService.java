@@ -27,7 +27,14 @@ public class TodoListService {
         todoListRepository.deleteById(id);
     }
 
-    public TodoItem updateTodoItem(TodoItem update) {
+    public TodoItem updateTodoItem(Integer id, TodoItem update) {
+        TodoItem todoItem = todoListRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
+        if (update.getText() != null){
+            todoItem.setText(update.getText());
+        }
+        if (update.getFinished() != null){
+            todoItem.setFinished(update.getFinished());
+        }
         return todoListRepository.save(update);
     }
 }
