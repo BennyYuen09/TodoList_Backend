@@ -18,4 +18,8 @@ public class TodoListService {
     public List<TodoItem> getTodoList() {
         return todoListRepository.findAll();
     }
+
+    public TodoItem addTodoItem(TodoItem todoItem) {
+        return null;
+    }
 }

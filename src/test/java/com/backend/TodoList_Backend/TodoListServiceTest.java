@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -36,6 +37,20 @@ public class TodoListServiceTest {
 
         //when
         List<TodoItem> actual = todoListService.getTodoList();
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void should_return_todo_item_when_add_todo_item_given_a_todo_item () {
+        //given
+        TodoItem expected = new TodoItem("Text", true);
+
+        when(todoListRepository.save(any(TodoItem.class))).thenReturn(expected);
+
+        //when
+        TodoItem actual = todoListService.addTodoItem(expected);
 
         //then
         assertEquals(expected, actual);
