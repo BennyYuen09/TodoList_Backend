@@ -3,6 +3,7 @@ package com.backend.TodoList_Backend.controller;
 import com.backend.TodoList_Backend.dto.TodoResponse;
 import com.backend.TodoList_Backend.mapper.TodoMapper;
 import com.backend.TodoList_Backend.service.TodoListService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class TodoListController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<TodoResponse> getTodoList (){
         return todoListService.getTodoList().stream().map(todoMapper::toResponse).collect(Collectors.toList());
     }

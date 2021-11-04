@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -54,5 +56,23 @@ public class TodoListControllerTest {
                 .andExpect(jsonPath("$[1].finished").value(todoItem2.isFinished()))
 
                 .andExpect(jsonPath("$[2]").doesNotExist());
+    }
+
+    @Test
+    void should_return_todo_item_when_add_todo_item_given_a_todo_item () throws Exception{
+        //given
+        String companyInfo = "{\n" +
+                "   \"text\": \"Thoughtworks\",\n" +
+                "   \"finished\": true\n" +
+                "}\n";
+
+        //when
+        ResultActions resultActions = mockMvc.perform(post("/todos")
+                .contentType(MediaType.APPLICATION_JSON).content(companyInfo));
+
+        //then
+        resultActions.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.text").value("Thoughtworks"))
+                .andExpect(jsonPath("$.finished").value(true));
     }
 }
