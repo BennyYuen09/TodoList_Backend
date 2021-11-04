@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/todos")
@@ -22,6 +23,6 @@ public class TodoListController {
 
     @GetMapping
     public List<TodoResponse> getTodoList (){
-        return null;
+        return todoListService.getTodoList().stream().map(todoMapper::toResponse).collect(Collectors.toList());
     }
 }
