@@ -14,7 +14,7 @@ public class TodoMapper {
         return todoResponse;
     }
 
-    public TodoItem toEntity(TodoRequest todoRequest){
+    public TodoItem toEntity(TodoRequest todoRequest) {
         TodoItem todoItem = new TodoItem();
         BeanUtils.copyProperties(todoRequest, todoItem);
         return todoItem;

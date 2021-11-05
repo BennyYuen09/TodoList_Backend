@@ -26,7 +26,7 @@ public class TodoListServiceTest {
     private TodoListService todoListService;
 
     @Test
-    void should_return_all_todo_items_when_get_todo_list_given_three_todo_items (){
+    void should_return_all_todo_items_when_get_todo_list_given_three_todo_items() {
         //given
         List<TodoItem> expected = Arrays.asList(
                 new TodoItem("Axel", false),
@@ -44,7 +44,7 @@ public class TodoListServiceTest {
     }
 
     @Test
-    void should_return_todo_item_when_add_todo_item_given_a_todo_item () {
+    void should_return_todo_item_when_add_todo_item_given_a_todo_item() {
         //given
         TodoItem expected = new TodoItem("Text", true);
 
@@ -58,7 +58,7 @@ public class TodoListServiceTest {
     }
 
     @Test
-    void should_return_todo_item_when_delete_item_given_a_id (){
+    void should_return_todo_item_when_delete_item_given_a_id() {
         //given
         doNothing().when(todoListRepository).deleteById(1);
 
@@ -70,7 +70,7 @@ public class TodoListServiceTest {
     }
 
     @Test
-    void should_return_update_todo_item_when_update_todo_item_given_update_info (){
+    void should_return_update_todo_item_when_update_todo_item_given_update_info() {
         //given
         TodoItem todoItem = new TodoItem("Test", true);
         when(todoListRepository.findById(any())).thenReturn(Optional.of(todoItem));
