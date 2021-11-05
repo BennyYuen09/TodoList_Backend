@@ -16,7 +16,7 @@ public class TodoItem {
     public TodoItem() {
     }
 
-    public TodoItem(String text, boolean finished) {
+    public TodoItem(String text, Boolean finished) {
         this.text = text;
         this.finished = finished;
     }

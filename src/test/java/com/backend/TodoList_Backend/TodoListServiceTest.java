@@ -60,14 +60,15 @@ public class TodoListServiceTest {
     @Test
     void should_return_todo_item_when_delete_item_given_a_id() {
         //given
-        when(todoListRepository.findById(any())).thenReturn(Optional.of(new TodoItem("Test", false)));
-        doNothing().when(todoListRepository).delete(any(TodoItem.class));
+        TodoItem todoItem = new TodoItem("Test", false);
+        when(todoListRepository.findById(any())).thenReturn(Optional.of(todoItem));
+        doNothing().when(todoListRepository).delete(todoItem);
 
         //when
         todoListService.deleteById(1);
 
         //then
-        verify(todoListRepository, times(1)).delete(any(TodoItem.class));
+        verify(todoListRepository, times(1)).delete(todoItem);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class TodoListServiceTest {
         TodoItem todoItem = new TodoItem("Test", true);
         when(todoListRepository.findById(any())).thenReturn(Optional.of(todoItem));
 
-        TodoItem update = new TodoItem("Thoughtwork", false);
+        TodoItem update = new TodoItem("Thoughtwork", null);
         TodoItem updated = new TodoItem("Thoughtwork", true);
         updated.setId(1);
         when(todoListRepository.save(any(TodoItem.class))).thenReturn(updated);
