@@ -60,13 +60,14 @@ public class TodoListServiceTest {
     @Test
     void should_return_todo_item_when_delete_item_given_a_id() {
         //given
-        doNothing().when(todoListRepository).deleteById(1);
+        when(todoListRepository.findById(any())).thenReturn(Optional.of(new TodoItem("Test", false)));
+        doNothing().when(todoListRepository).delete(any(TodoItem.class));
 
         //when
         todoListService.deleteById(1);
 
         //then
-        verify(todoListRepository, times(1)).deleteById(1);
+        verify(todoListRepository, times(1)).delete(any(TodoItem.class));
     }
 
     @Test
